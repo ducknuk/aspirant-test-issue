@@ -1,0 +1,69 @@
+{% extends 'main.html.twig' %}
+
+{% block title %}{{ trailers | length }} iTunes Movie trailers{% endblock %}
+
+{% block content %}
+    <style>
+        body{
+            background-color: black;
+        }
+        .container{
+            color: white;
+        }
+        a{
+            text-underline: none;
+            text-decoration: none;
+            color: white;
+        }
+        a:hover{
+            text-underline: white;
+            color: white;
+        }
+        .card{
+            border: none !important;
+        }
+        .film_wrapper{
+            overflow: hidden;
+            border-radius: .25rem;
+            background-color: black;
+        }
+       .card-img-top{
+           -webkit-transition: .3s;
+           transition: .3s;
+       }
+       .card-img-top:hover{
+           transform: scale(1.1);
+       }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="mt-5 mb-4">{{ trailers | length }} iTunes Movie trailers</h1>
+            </div>
+            <div class="col-md-5">
+                <h3 class="mt-5 mb-4" style="float: right">{{ day }}, {{ data }}, {{ time }}</h3>
+            </div>
+        </div>
+        <div class="info">
+            <h4>Hello from <strong>{{ controller_name }}</strong> and its method - <strong>{{ method_name }}</strong> :3</h4>
+        </div>
+        <div class="row">
+            {% for trailer in trailers %}
+                <div class="col-md-4" style="margin-bottom: 10px">
+                    <div class="card" style="width: 18rem; color: black">
+                        <div class="film_wrapper">
+                            <a href="/trailer/{{ trailer.id }}"><img class="card-img-top" src="{{ trailer.link }}/images/background.jpg" alt="Card image cap"></a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ trailer.title }}</h5>
+                            <p class="card-text">Click below for more info</p>
+                            <a href="/trailer/{{ trailer.id }}" class="btn btn-info">{{ trailer.title }}</a>
+                            <br>
+                            <a href="{{ trailer.link }}" class="btn btn-primary" style="margin-top: 5px">Trailer</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
